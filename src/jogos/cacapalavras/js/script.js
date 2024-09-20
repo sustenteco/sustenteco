@@ -1,3 +1,4 @@
+const BASE_URL = "https://sustenteco.onrender.com"
 const words = ["ENERGIA", "INOVACAO", "EMPREGO", "SUSTENTAVEL", "PARCERIA", "TECNOLOGIA", "CRESCIMENTO", "COLABORACAO"];
 const maxLetters = getMaxLetters(words);
 const crossword = document.getElementById("crossword");
@@ -239,7 +240,7 @@ function updateWordList() {
 async function saveRecord(time) {
   try {
     let res;
-    const response = await fetch("http://localhost:3000/api/record/crossworld", {
+    const response = await fetch(`${BASE_URL}/api/record/crossworld`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

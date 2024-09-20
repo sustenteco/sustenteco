@@ -1,3 +1,4 @@
+const BASE_URL = "https://sustenteco.onrender.com"
 const inputs = document.querySelector(".inputs"),
   resetBtns = document.querySelectorAll(".reset-btn"),
   hint = document.querySelector(".hint span"),
@@ -180,7 +181,7 @@ randomWord();
 async function saveRecord(time, incorrects) {
   try {
     let res;
-    const response = await fetch("http://localhost:3000/api/record/hangame", {
+    const response = await fetch(`${BASE_URL}/api/record/hangame`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,3 +1,4 @@
+const BASE_URL = "https://sustenteco.onrender.com"
 const FRONT = "card_front";
 const BACK = "card_back";
 const CARD = "card";
@@ -96,7 +97,7 @@ async function saveTime(time) {
   try {
     console.log(time);
     let res;
-    const response = await fetch("http://localhost:3000/api/record/ecopuzzle", {
+    const response = await fetch(`${BASE_URL}/api/record/ecopuzzle`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

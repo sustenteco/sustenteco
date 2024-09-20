@@ -9,11 +9,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateUI(info);
   }
 window.onload = function() {
-  const userName = "Nome do Jogador";
-  const gamesCompleted = 30;
-  const challengesWon = 18;
-  const challengesLost = 12;
-  const totalPlayTime = "48 horas e 30 minutos";
+  const userName = "Usuário";
+  const gamesCompleted = 0;
+  const challengesWon = 0;
+  const challengesLost = 0;
+  const totalPlayTime = "";
 
   console.log(document.querySelector('.games-completed')); // Verifica se o elemento existe
   console.log(document.querySelector('.challenges-won'));

@@ -1,3 +1,5 @@
+const BASE_URL = "https://sustenteco.onrender.com"
+
 document
   .getElementById("register-form")
   .addEventListener("submit", function (event) {
@@ -30,7 +32,7 @@ document
     }
 
     // Envio da requisição ao backend com ambos os campos de senha
-    fetch("http://localhost:3000/api/users/register", {
+    fetch(`${BASE_URL}/api/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

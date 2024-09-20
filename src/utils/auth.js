@@ -1,8 +1,10 @@
+const BASE_URL = "https://sustenteco.onrender.com"
+
 let user = null;
 
 export async function isAuthenticated() {
   try {
-    const response = await fetch("http://localhost:3000/api/isLogged", {
+    const response = await fetch(`${BASE_URL}/api/isLogged`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

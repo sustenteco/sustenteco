@@ -1,3 +1,5 @@
+const BASE_URL = "https://sustenteco.onrender.com"
+
 function startGame() {
     const quizContainer = document.getElementById('quiz-container');
     const quizContainerWrapper = document.getElementById('quiz-wrapper');
@@ -340,7 +342,7 @@ function startGame() {
   async function saveRecord(time, incorrects) {
       try {
         let res;
-        const response = await fetch("http://localhost:3000/api/record/quiz", {
+        const response = await fetch(`${BASE_URL}/api/record/quiz`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

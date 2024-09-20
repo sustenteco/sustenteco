@@ -1,8 +1,10 @@
+const BASE_URL = "https://sustenteco.onrender.com"
+
 let info = null;
 
 export async function getInfo() {
   try {
-    const response = await fetch("http://localhost:3000/api/perfil/info", {
+    const response = await fetch(`${BASE_URL}/api/perfil/info`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
