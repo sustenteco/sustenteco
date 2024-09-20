@@ -1,13 +1,9 @@
 import { isAuthenticated } from './auth.js';
 
 export async function requireAuth() {
-  try {
-    const isAuth = await isAuthenticated();
-    if (!isAuth) {
-      window.location.href = "../login/index.html?auth=required";
-    }
-  } catch (error) {
-    console.error("Erro ao verificar a autenticação:", error);
-    window.location.href = "../login/index.html?auth=required";
+  const isAuth = await isAuthenticated();
+
+  if (!isAuth) {
+    window.location.href = "../login/index.html?auth=required"; // Redireciona para a página de login
   }
 }

@@ -11,7 +11,6 @@ const sql = require('mssql');
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || "mysecretkey";
 
-
 // Configuração do CORS
 app.use(cors({
   origin: 'https://sustenteco-app.onrender.com', // Origem do front-end sem a barra no final
@@ -35,9 +34,9 @@ function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1]; // Extrai o token
 
-  if (token == null) return res.status(401).json({ message: "Token não fornecido" });
+  if (!token) return res.status(401).json({ message: "Token não fornecido" });
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+  jwt.verify(token, JWT_SECRET, (err, user) => {
     if (err) return res.status(403).json({ message: "Token inválido ou expirado" });
     req.user = user;
     next();
@@ -128,13 +127,11 @@ app.post('/api/users/reset-password', async (req, res) => {
   }
 });
 
-// Verificar se o usuário está autenticado
+// Verificar se o usuário está autenticado (usando JWT)
 app.get("/api/isLogged", authenticateToken, (req, res) => {
-  // Remove o campo de senha para não enviá-lo ao cliente
   const { password, ...userWithoutPassword } = req.user;
   return res.status(200).json(userWithoutPassword);
 });
-
 
 // Registro de usuário
 app.post("/api/users/register", async (req, res) => {
@@ -220,7 +217,7 @@ app.post("/api/users/login", async (req, res) => {
   }
 });
 
-// Inserir record no jogo Crossworld
+// Exemplo de rota protegida para inserir um recorde
 app.post("/api/record/crossworld", authenticateToken, async (req, res) => {
   const { id } = req.user;
   const { tempo_record } = req.body;
