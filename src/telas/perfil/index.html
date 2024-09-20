@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Perfil do Jogador</title>
+</head>
+
+<body>
+  <div class="perfil-container">
+    <div class="perfil-card">
+      <img src="../../../assets/img/avatar-teste.webp" class="perfil-avatar">
+      <div class="perfil-info">
+        <h2>Nome do Jogador</h2>
+        <div class="dados">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span>Jogos Completos:</span>
+            <span id="spanJogosCompletos">30</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span>Desafios Vencidos:</span>
+            <span id="spanDesafiosVencidos">18</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span>Tempo Total:</span>
+            <span id="spanTempoTotal">48 horas e 30 minutos</span>
+          </div>
+        </div>
+      </div>
+      <div class="perfil-actions">
+        <button id="btnGoToRanking" class="btn btn-primary">Ranking</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>

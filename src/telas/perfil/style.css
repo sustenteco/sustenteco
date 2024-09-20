@@ -1,0 +1,148 @@
+:root {
+  --cor-primaria: #22543d; /* Cor de fundo principal */
+  --cor-secundaria: #a5a5a5; /* Cor secundária */
+  --cor-fundo: #f2f2f2; /* Cor de fundo do conteúdo */
+  --cor-texto: #f2f2f2; /* Cor do texto */
+  --cor-botao: #4caf50; /* Cor dos botões */
+  --fonte-gamer: "Secular One", sans-serif; /* Fonte principal */
+}
+
+body {
+  margin: 0;
+  height: 100vh; /* Ocupa a altura total da viewport */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--fonte-gamer);
+  background-color: var(--cor-primaria); /* Fundo principal */
+  color: var(--cor-texto); /* Cor do texto */
+}
+
+.perfil-container {
+  background-color: var(--cor-fundo);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 80%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.perfil-card {
+  background-color: var(--cor-fundo); /* Fundo do cartão de perfil */
+  padding: 20px;
+  border-radius: 10px;
+  color: var(--cor-texto); /* Cor do texto */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.perfil-avatar {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+  border: 3px solid var(--cor-secundaria); /* Borda do avatar */
+  border-radius: 50%;
+  background-image: url('../../../assets/img/avatar-teste.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+.perfil-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.perfil-info h2 {
+  padding: 16px;
+  margin: 0;
+  font-size: xx-large;
+  color: #000; /* Cor secundária para o título */
+}
+
+.perfil-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  font-family: var(--fonte-gamer);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--cor-botao); /* Cor dos botões */
+  width: 200px;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  border-right: solid #3e8e41 6px;
+  border-bottom: solid #3e8e41 4px;
+}
+
+.btn-primary:hover {
+  color: #3e8e41;
+  transition: 0.1s;
+}
+
+.dados {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  width: 450px;
+  font-size: larger;
+  background-color: var(--cor-fundo); /* Fundo de dados */
+  color: #000; /* Cor do texto */
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    background-color: var(--cor-texto);
+  }
+
+  .perfil-container {
+    width: 95%;
+    padding: 10px;
+    box-shadow: none;
+  }
+
+  .perfil-avatar {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+  }
+
+  .perfil-info {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .perfil-info h2 {
+    font-size: 18px;
+    padding: 12px;
+  }
+
+  .dados {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .perfil-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 8px;
+  }
+}

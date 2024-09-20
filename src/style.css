@@ -1,0 +1,45 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Secular+One&display=swap");
+
+:root {
+  --cor-primaria: #22543d;
+  --cor-secundaria: #a5a5a5;
+  --cor-fundo: #f2f2f2;
+  --cor-texto: #333;
+  --cor-botao: #4caf50;
+  --fonte-gamer: "Secular One", sans-serif;
+}
+
+body {
+  font-family: var(--fonte-gamer);
+  background-color: var(--cor-fundo);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+}
+
+h1 {
+  color: var(--cor-primaria);
+  font-size: 2.5rem;
+}
+
+button {
+  background-color: var(--cor-botao);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  margin: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: var(--fonte-gamer);
+}
+
+button:hover {
+  background-color: var(--cor-primaria);
+} */

@@ -1,0 +1,275 @@
+@import url("https://fonts.googleapis.com/css2?family=Secular+One&display=swap");
+
+/* Variáveis de cor e tipografia */
+:root {
+  --cor-primaria: #22543d;
+  --cor-secundaria: #a5a5a5;
+  --cor-fundo: #f2f2f2;
+  --cor-texto: #333;
+  --cor-botao: #4caf50;
+  --fonte-gamer: "Secular One", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--cor-fundo);
+  font-family: var(--fonte-gamer);
+}
+
+/* Layout principal */
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Coluna esquerda para a imagem (desktop) */
+.left-content {
+  flex: 1;
+  background-color: var(--cor-primaria);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.left-content img {
+  width: 500px;
+  height: 500px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Coluna direita para o formulário de login */
+.right-content {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+#auth-container {
+  width: 100%;
+  max-width: 350px;
+}
+
+#auth-container img {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: var(--cor-primaria);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  text-align: left;
+  color: var(--cor-texto);
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 12px;
+  border: 1px solid var(--cor-secundaria);
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--cor-texto);
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box; /* Incluir padding na largura */
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+}
+
+.btn-primary {
+  font-family: var(--fonte-gamer);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  background-color: #4caf50;
+  width: 100%;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  border-right: solid #3e8e41 6px;
+  border-bottom: solid #3e8e41 4px;
+}
+
+.btn-primary:hover {
+  color: #3e8e41;
+  transition: 0.1s;
+}
+
+p {
+  margin: 0;
+  color: var(--cor-texto);
+}
+
+a {
+  color: var(--cor-primaria);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.modal {
+  display: none; /* Ocultar modal por padrão */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+
+/* Snackbar */
+.snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-family: var(--fonte-gamer);
+}
+
+/* Estilo para o wrapper de input de senha */
+.input-password-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.input-password-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* Espaço para o ícone */
+}
+
+.input-password-wrapper .toggle-password {
+  position: absolute;
+  right: 10px; /* Espaçamento do lado direito */
+  cursor: pointer;
+  color: var(--cor-secundaria);
+  font-size: 1.2rem;
+}
+
+#email-step {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#code-step {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#reset-step {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.snackbar.show {
+  visibility: visible;
+  animation: fadeInOut 3s;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  10%, 90% { opacity: 1; }
+}
+
+/* Ajustes para Mobile */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Muda para coluna apenas no mobile */
+    padding: 20px; /* Padding para não encostar nas bordas */
+    align-items: center; /* Centraliza os itens */
+    justify-content: center;
+    box-sizing: border-box; /* Garantir que o padding seja incluído na largura */
+  }
+
+  .left-content {
+    display: none; /* Esconder a imagem no mobile */
+  }
+
+  .right-content {
+    width: 100%;
+    max-width: 500px; /* Limite máximo de largura */
+    background-color: var(--cor-fundo); /* Fundo com var(--cor-fundo) */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra ao redor do formulário */
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 20px;
+  }
+
+  #auth-container {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  input, button {
+    width: 100%; /* Inputs e botões ocupam 100% da largura */
+  }
+}

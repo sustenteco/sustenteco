@@ -1,0 +1,400 @@
+@import url("https://fonts.googleapis.com/css2?family=Secular+One&display=swap");
+
+:root {
+    --cor-primaria: #22543d;
+    --cor-secundaria: #a5a5a5;
+    --cor-fundo: #f2f2f2;
+    --cor-texto: #333;
+    --cor-botao: #4caf50;
+    --fonte-gamer: "Secular One", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--fonte-gamer);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: white;
+}
+
+hr {
+    opacity: 40%;
+}
+
+.divider-y {
+    width: 0.1px;
+    opacity: 40%;
+    height: 100%;
+    background-color: var(--cor-secundaria);
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: unset;
+    gap: 32px;
+    padding: 8px 16px;
+    background-color: #f2f2f2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-bar .platform-name {
+  height: 50px;
+}
+
+.nav-bar .logout-btn {
+    background-color: var(--cor-botao);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.nav-bar .logout-btn:hover {
+    background-color: darken(var(--cor-botao), 10%);
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    flex-grow: 1;
+    width: 100%;
+    height: calc(100vh - 60px); /* Ajusta para incluir a altura da navbar */
+}
+
+.sidebar {
+    z-index: 1000; /* Garante que a sidebar fique acima do conteúdo */
+}
+
+.user-greeting {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 10px auto;
+}
+
+.sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #f2f2f2;
+    color: var(--cor-primaria);
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar .content-sidebar {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.sidebar h4 {
+    font-size: 24px;
+    padding: 4px;
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: var(--cor-primaria);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.button-logout {
+  display: flex;
+  text-align: center;
+  padding-bottom: 16px;
+  justify-content: center;
+  color: rgb(182, 48, 48);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button-logout:hover {
+  text-decoration: underline;
+}
+
+.sidebar ul li:hover {
+    background-color: var(--cor-botao);
+}
+
+.content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.content h1 {
+    margin-bottom: 20px;
+}
+
+#game-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#player-info-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1000;
+}
+
+.player-info-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    background-color: var(--cor-botao);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-info-btn i {
+    font-size: 20px;
+}
+
+.close-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #ddd;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.close-btn:hover {
+    background-color: #ccc;
+}
+
+.close-btn i {
+    margin-right: 5px;
+}
+
+.sidebar-list.disabled {
+    pointer-events: none;
+}
+
+.modal {
+  display: none; /* Oculto por padrão */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escurecido */
+}
+
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+
+
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#btnConfirmExit {
+  background-color: red;
+  color: white;
+}
+
+#btnCancelExit {
+  background-color: var(--cor-botao);
+  color: white;
+}
+  
+
+.toggle-sidebar-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 20px;
+}
+
+.toggle-sidebar-btn .bar {
+    width: 100%;
+    height: 3px;
+    background-color: #4caf50;
+    transition: all 0.3s ease;
+}
+
+.toggle-sidebar-btn .bar:nth-child(2) {
+    width: 75%;
+}
+
+.toggle-sidebar-btn .bar:nth-child(3) {
+    width: 50%;
+}
+
+.toggle-sidebar-btn.open .bar {
+    transform: rotate(-45deg);
+    transition: transform 0.3s ease;
+}
+
+.toggle-sidebar-btn.open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.toggle-sidebar-btn.open .bar:nth-child(3) {
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+.footer {
+    margin-top: auto;
+    opacity: 0.4;
+}
+
+.footer p {
+    color: var(--cor-primaria);
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .carousel-item {
+    min-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .carousel-item img {
+    width: 100%;
+    display: block;
+  }
+  
+  .desktop-carousel {
+    display: none;
+  }
+  
+  .mobile-carousel {
+    display: none;
+  }
+  
+  @media (min-width: 1000px) {
+    .desktop-carousel {
+      display: flex;
+    }
+    .carousel-item img {
+      height: 100vh;
+      object-fit: cover;
+    }
+  }
+  
+  @media (max-width: 999px) {
+    .mobile-carousel {
+      display: flex;
+    }
+
+    .sidebar h2 {
+      font-size: 18px;
+      padding: 4px;
+      text-align: center;
+  }
+  }
+  
+  .carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .indicator {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin: 0 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .indicator.active {
+    background-color: rgba(255, 255, 255, 1);
+  }
