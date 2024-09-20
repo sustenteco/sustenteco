@@ -127,12 +127,6 @@ app.post('/api/users/reset-password', async (req, res) => {
   }
 });
 
-// // Verificar se o usuário está autenticado (usando JWT)
-// app.get("/api/isLogged", authenticateToken, (req, res) => {
-//   const { password, ...userWithoutPassword } = req.user;
-//   return res.status(200).json(userWithoutPassword);
-// });
-
 // Registro de usuário
 app.post("/api/users/register", async (req, res) => {
   const { name, email, password, password2 } = req.body;
