@@ -9,6 +9,8 @@ const sendRecoveryEmail = require('./sendEmail');
 const sql = require('mssql');
 
 const PORT = process.env.PORT || 3000;
+const JWT_SECRET = process.env.JWT_SECRET || "mysecretkey";
+
 
 // Configuração do CORS
 app.use(cors({
@@ -207,7 +209,7 @@ app.post("/api/users/login", async (req, res) => {
     // Gerar JWT
     const token = jwt.sign(
       { id: user.id, email: user.email, name: user.name },
-      process.env.JWT_SECRET,
+      JWT_SECRET,
       { expiresIn: '7d' } // Token válido por 7 dias
     );
 
