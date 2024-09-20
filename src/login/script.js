@@ -33,7 +33,7 @@ document
           showSnackbar("Login bem-sucedido!", "success");
           localStorage.setItem("email", email);
           setTimeout(() => {
-            window.location.href = "/src/telas/home/index.html?";
+            window.location.href = "../home/index.html?";
           }, 1000);
         } else {
           showSnackbar("Credenciais inválidas. Por favor, tente novamente.", "error");
