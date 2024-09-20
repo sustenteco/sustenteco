@@ -1,10 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const { connectToDatabase } = require("./dbConfig"); // Adaptar para SQL Server
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
-require("dotenv").config();
+const axios = require('axios');
 const cors = require('cors');
 const app = express();
 const sendRecoveryEmail = require('./sendEmail');
@@ -344,6 +345,9 @@ app.get("/api/perfil/info", isAuthenticated, async (req, res) => {
   }
 });
 
+app.get('/api/get', async (req, res) => {
+});
+
 // Função de middleware para verificar se o usuário está autenticado
 function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -351,3 +355,14 @@ function isAuthenticated(req, res, next) {
   }
   res.status(401).json({ message: "Não autenticado" });
 }
+
+// Rota fake de GET para manter a conexão
+setInterval(() => {
+  axios.get(`https://sustenteco.onrender.com/api/get`)
+    .then(response => {
+      console.log('GET realizado com sucesso');
+    })
+    .catch(error => {
+      console.error('GET feito.');
+    });
+}, 5 * 60 * 1000);  // 5 minutos em milissegundos
