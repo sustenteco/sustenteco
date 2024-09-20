@@ -1,8 +1,12 @@
-import { requireAuth } from '../utils/middleware.js';
 import { getInfo } from '../services/infoPerfil.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await requireAuth();
+  const token = localStorage.getItem('token');
+  if (!token) {
+    window.location.href = '../login/index.html?auth=required';
+    return;
+  }
+
   const info = await getInfo();
   console.log(info)
   if (info) {
