@@ -94,6 +94,8 @@ function createCardFace(face, card, element) {
 }
 
 async function saveTime(time) {
+  const token = localStorage.getItem("token");
+  
   try {
     console.log(time);
     let res;
@@ -101,6 +103,7 @@ async function saveTime(time) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify({"tempo_record": time}),
       credentials: "include",

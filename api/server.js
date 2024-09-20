@@ -2,54 +2,50 @@ require("dotenv").config();
 const express = require("express");
 const { connectToDatabase } = require("./dbConfig"); // Adaptar para SQL Server
 const bcrypt = require("bcrypt");
-const passport = require("passport");
-const flash = require("express-flash");
-const session = require("express-session");
-const axios = require('axios');
-const cors = require('cors');
+const jwt = require("jsonwebtoken");
+const cors = require("cors");
 const app = express();
 const sendRecoveryEmail = require('./sendEmail');
 const sql = require('mssql');
 
-app.use(cors({
-  origin: 'https://sustenteco-app.onrender.com',
-  credentials: true
-}));
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://sustenteco-app.onrender.com"); // Origem do front-end
-  res.header("Access-Control-Allow-Credentials", "true"); // Permite cookies
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-  next();
-});
-
 const PORT = process.env.PORT || 3000;
 
-const initializePassport = require("./passportConfig");
+// Configuração do CORS
+app.use(cors({
+  origin: 'https://sustenteco-app.onrender.com', // Origem do front-end sem a barra no final
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+}));
 
-initializePassport(passport);
-
-// Middleware
+// Middleware para analisar JSON
 app.use(express.json());
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'none',
-    }
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
+// Função para gerar código de recuperação
+function generateRecoveryCode() {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+}
 
+const recoveryCodes = {};
+
+// Middleware para verificar JWT
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Extrai o token
+
+  if (token == null) return res.status(401).json({ message: "Token não fornecido" });
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.status(403).json({ message: "Token inválido ou expirado" });
+    req.user = user;
+    next();
+  });
+}
+
+// Conectar ao banco de dados antes de iniciar o servidor
 connectToDatabase().then(pool => {
+  console.log("Conexão com SQL Server realizada com sucesso");
+
   app.get("/", (req, res) => {
     res.send("hello");
   });
@@ -61,13 +57,6 @@ connectToDatabase().then(pool => {
 }).catch(err => {
   console.error("Erro ao conectar ao SQL Server:", err);
 });
-
-// Função para gerar código de recuperação
-function generateRecoveryCode() {
-  return Math.floor(100000 + Math.random() * 900000).toString();
-}
-
-const recoveryCodes = {};
 
 // Enviar código de recuperação
 app.post('/api/users/send-recovery-code', async (req, res) => {
@@ -138,15 +127,12 @@ app.post('/api/users/reset-password', async (req, res) => {
 });
 
 // Verificar se o usuário está autenticado
-app.get("/api/isLogged", (req, res) => {
-  if (req.isAuthenticated()) {
-    // Remove o campo de senha para não enviá-lo ao cliente
-    const { password, ...userWithoutPassword } = req.user;
-    return res.status(200).json(userWithoutPassword);
-  } else {
-    return res.status(401).json({ message: "Usuário não autenticado" });
-  }
+app.get("/api/isLogged", authenticateToken, (req, res) => {
+  // Remove o campo de senha para não enviá-lo ao cliente
+  const { password, ...userWithoutPassword } = req.user;
+  return res.status(200).json(userWithoutPassword);
 });
+
 
 // Registro de usuário
 app.post("/api/users/register", async (req, res) => {
@@ -193,26 +179,47 @@ app.post("/api/users/register", async (req, res) => {
   }
 });
 
-// Login de usuário
-app.post("/api/users/login", (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
-    if (err) {
-      return res.status(500).json({ message: "Erro no servidor" });
+// Login de usuário com JWT
+app.post("/api/users/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: "Por favor, forneça email e senha" });
+  }
+
+  try {
+    const pool = await connectToDatabase();
+    const result = await pool.request()
+      .input('email', sql.NVarChar, email)
+      .query('SELECT * FROM [User] WHERE email = @email');
+
+    if (result.recordset.length === 0) {
+      return res.status(401).json({ message: "Falha na autenticação: Usuário não encontrado" });
     }
-    if (!user) {
-      return res.status(401).json({ message: "Falha na autenticação", error: info.message, booleanAuth: false });
+
+    const user = result.recordset[0];
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ message: "Falha na autenticação: Senha incorreta" });
     }
-    req.logIn(user, (err) => {
-      if (err) {
-        return res.status(500).json({ message: "Erro ao iniciar sessão" });
-      }
-      return res.status(200).json({ message: "Autenticação bem-sucedida", booleanAuth: true });
-    });
-  })(req, res, next);
+
+    // Gerar JWT
+    const token = jwt.sign(
+      { id: user.id, email: user.email, name: user.name },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' } // Token válido por 7 dias
+    );
+
+    res.status(200).json({ message: "Autenticação bem-sucedida", token });
+  } catch (err) {
+    console.error("Erro no login:", err);
+    res.status(500).json({ message: "Erro no servidor durante o login" });
+  }
 });
 
 // Inserir record no jogo Crossworld
-app.post("/api/record/crossworld", isAuthenticated, async (req, res) => {
+app.post("/api/record/crossworld", authenticateToken, async (req, res) => {
   const { id } = req.user;
   const { tempo_record } = req.body;
 
@@ -231,7 +238,7 @@ app.post("/api/record/crossworld", isAuthenticated, async (req, res) => {
 });
 
 // Inserir record no jogo Ecopuzzle
-app.post("/api/record/ecopuzzle", isAuthenticated, async (req, res) => {
+app.post("/api/record/ecopuzzle", authenticateToken, async (req, res) => {
   const { id } = req.user;
   const { tempo_record } = req.body;
 
@@ -250,7 +257,7 @@ app.post("/api/record/ecopuzzle", isAuthenticated, async (req, res) => {
 });
 
 // Inserir record no jogo Hangame
-app.post("/api/record/hangame", isAuthenticated, async (req, res) => {
+app.post("/api/record/hangame", authenticateToken, async (req, res) => {
   const { id } = req.user;
   const { tempo_record, quantidade_erros } = req.body;
 
@@ -270,7 +277,7 @@ app.post("/api/record/hangame", isAuthenticated, async (req, res) => {
 });
 
 // Inserir record no jogo Quiz
-app.post("/api/record/quiz", isAuthenticated, async (req, res) => {
+app.post("/api/record/quiz", authenticateToken, async (req, res) => {
   const { id } = req.user;
   const { tempo_record, quantidade_erros } = req.body;
 
@@ -290,7 +297,7 @@ app.post("/api/record/quiz", isAuthenticated, async (req, res) => {
 });
 
 // Pegar informações do perfil do usuário (jogos completos, desafios vencidos, tempo total)
-app.get("/api/perfil/info", isAuthenticated, async (req, res) => {
+app.get("/api/perfil/info", authenticateToken, async (req, res) => {
   const { id } = req.user;
 
   try {
@@ -303,18 +310,19 @@ app.get("/api/perfil/info", isAuthenticated, async (req, res) => {
           u.name AS usuario_nome,
 
           -- Jogos Completos: conta o número de vezes que o usuário jogou cada um dos quatro jogos
-          LEAST(
-            COALESCE(e.jogos_ecopuzzle, 0),
-            COALESCE(c.jogos_crossworld, 0),
-            COALESCE(q.jogos_quiz, 0),
-            COALESCE(h.jogos_hangame, 0)
-          ) AS jogos_completos,
+          CASE 
+            WHEN e.jogos_ecopuzzle <= c.jogos_crossworld AND e.jogos_ecopuzzle <= q.jogos_quiz AND e.jogos_ecopuzzle <= h.jogos_hangame THEN e.jogos_ecopuzzle
+            WHEN c.jogos_crossworld <= e.jogos_ecopuzzle AND c.jogos_crossworld <= q.jogos_quiz AND c.jogos_crossworld <= h.jogos_hangame THEN c.jogos_crossworld
+            WHEN q.jogos_quiz <= e.jogos_ecopuzzle AND q.jogos_quiz <= c.jogos_crossworld AND q.jogos_quiz <= h.jogos_hangame THEN q.jogos_quiz
+            ELSE h.jogos_hangame
+          END AS jogos_completos,
 
           -- Desafios Vencidos: soma o número total de jogos jogados pelo usuário
           COALESCE(e.jogos_ecopuzzle, 0) + COALESCE(c.jogos_crossworld, 0) + COALESCE(q.jogos_quiz, 0) + COALESCE(h.jogos_hangame, 0) AS desafios_vencidos,
 
           -- Tempo Total: soma o tempo total gasto em todos os jogos pelo usuário
           COALESCE(e.tempo_total_ecopuzzle, 0) + COALESCE(c.tempo_total_crossworld, 0) + COALESCE(q.tempo_total_quiz, 0) + COALESCE(h.tempo_total_hangame, 0) AS tempo_total_jogos
+
         FROM [User] u
         LEFT JOIN (
           SELECT id_usuario, COUNT(*) AS jogos_ecopuzzle, SUM(tempo_record) AS tempo_total_ecopuzzle
@@ -346,24 +354,7 @@ app.get("/api/perfil/info", isAuthenticated, async (req, res) => {
   }
 });
 
+// Rota fake de GET para manter a conexão (opcional)
 app.get('/api/get', async (req, res) => {
+  res.status(200).json({ message: "Conexão ativa" });
 });
-
-// Função de middleware para verificar se o usuário está autenticado
-function isAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.status(401).json({ message: "Não autenticado" });
-}
-
-// Rota fake de GET para manter a conexão
-setInterval(() => {
-  axios.get(`https://sustenteco.onrender.com/api/get`)
-    .then(response => {
-      console.log('GET realizado com sucesso');
-    })
-    .catch(error => {
-      console.error('GET feito.');
-    });
-}, 5 * 60 * 1000);  // 5 minutos em milissegundos

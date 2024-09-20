@@ -179,12 +179,15 @@ function randomWord() {
 randomWord();
 
 async function saveRecord(time, incorrects) {
+  const token = localStorage.getItem("token");
+  
   try {
     let res;
     const response = await fetch(`${BASE_URL}/api/record/hangame`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify({"tempo_record": time, "quantidade_erros": incorrects}),
       credentials: "include",

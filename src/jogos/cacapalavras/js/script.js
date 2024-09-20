@@ -238,12 +238,15 @@ function updateWordList() {
 }
 
 async function saveRecord(time) {
+  const token = localStorage.getItem("token");
+
   try {
     let res;
     const response = await fetch(`${BASE_URL}/api/record/crossworld`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify({"tempo_record": time}),
       credentials: "include",
