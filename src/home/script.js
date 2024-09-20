@@ -1,5 +1,5 @@
-import { requireAuth } from '../../utils/middleware.js';
-import { getUser } from '../../utils/auth.js';
+import { requireAuth } from '../utils/middleware.js';
+import { getUser } from '../utils/auth.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
   await requireAuth();

@@ -1,5 +1,5 @@
-import { requireAuth } from '../../utils/middleware.js';
-import { getInfo } from '../../services/infoPerfil.js';
+import { requireAuth } from '../utils/middleware.js';
+import { getInfo } from '../services/infoPerfil.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
   await requireAuth();
