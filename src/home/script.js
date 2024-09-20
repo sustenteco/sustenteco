@@ -2,9 +2,12 @@ import { requireAuth } from '../utils/middleware.js';
 import { getUser } from '../utils/auth.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await requireAuth();
+  const token = localStorage.getItem('token'); // Verifica se o token está armazenado no localStorage
+  if (!token) {
+    window.location.href = '../login/index.html?auth=required';
+    return;
+  }
   const user = getUser();
-  console.log(user);
   if (user) {
     updateUI(user);
   }
