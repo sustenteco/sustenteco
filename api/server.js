@@ -12,14 +12,15 @@ const sendRecoveryEmail = require('./sendEmail');
 const sql = require('mssql');
 
 app.use(cors({
-  origin: 'https://sustenteco-app.onrender.com/',
+  origin: 'https://sustenteco-app.onrender.com',
   credentials: true
 }));
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://sustenteco-app.onrender.com/"); // Origem do front-end
+  res.header("Access-Control-Allow-Origin", "https://sustenteco-app.onrender.com"); // Origem do front-end
   res.header("Access-Control-Allow-Credentials", "true"); // Permite cookies
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
   next();
 });
 

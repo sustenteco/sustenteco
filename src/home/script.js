@@ -104,22 +104,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     let iframeSrc = '';
     switch (destination) {
       case 'cacapalavras':
-        iframeSrc = "../../jogos/cacapalavras/index.html";
+        iframeSrc = "/src/jogos/cacapalavras/index.html";
         break;
       case 'hangame':
-        iframeSrc = "../../jogos/forca/index.html";
+        iframeSrc = "/src/jogos/forca/index.html";
         break;
       case 'ecopuzzle':
-        iframeSrc = "../../jogos/ecopuzzle/index.html";
+        iframeSrc = "/src/jogos/ecopuzzle/index.html";
         break;
       case 'quiz':
-        iframeSrc = "../../jogos/quiz/index.html";
+        iframeSrc = "/src/jogos/quiz/index.html";
         break;
       case 'perfil':
-        iframeSrc = "../perfil/index.html";
+        iframeSrc = "/src/perfil/index.html";
         break;
       case 'ranking':
-        iframeSrc = "../ranking/index.html";
+        iframeSrc = "/src/ranking/index.html";
         break;
       default:
         gameContainer.innerHTML = '<h2>Selecione uma opção na barra lateral</h2>';
