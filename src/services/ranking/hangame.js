@@ -5,7 +5,7 @@ export async function getHangameRanking() {
       console.log("Token não encontrado");
       return false;
     }
-    const response = await fetch("http://localhost:3000/api/ranking/hangame", {
+    const response = await fetch("https://sustenteco.onrender.com/api/ranking/hangame", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

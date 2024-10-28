@@ -5,7 +5,7 @@ export async function getCrosswoldRanking() {
       console.log("Token não encontrado");
       return false;
     }
-    const response = await fetch("http://localhost:3000/api/ranking/crossworld", {
+    const response = await fetch("https://sustenteco.onrender.com/api/ranking/crossworld", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

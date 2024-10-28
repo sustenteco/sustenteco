@@ -14,7 +14,7 @@ document
     submitButton.classList.add('loading'); // Adiciona classe de carregamento ao botão
     message.style.display = "none";
 
-    fetch("http://localhost:3000/api/users/login", {
+    fetch("https://sustenteco.onrender.com/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -82,7 +82,7 @@ document
   document.getElementById('send-code-btn').addEventListener('click', function () {
     const email = document.getElementById('recovery-email').value;
   
-    fetch('http://localhost:3000/api/users/send-recovery-code', {
+    fetch('https://sustenteco.onrender.com/api/users/send-recovery-code', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ document
     }
   
     // Verifique o código digitado pelo usuário com o código enviado por email
-    fetch('http://localhost:3000/api/users/verify-recovery-code', {
+    fetch('https://sustenteco.onrender.com/api/users/verify-recovery-code', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ document
     }
   
     // Enviar a nova senha para o servidor
-    fetch('http://localhost:3000/api/users/reset-password', {
+    fetch('https://sustenteco.onrender.com/api/users/reset-password', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -30,7 +30,7 @@ document
     }
 
     // Envio da requisição ao backend com ambos os campos de senha
-    fetch("http://localhost:3000/api/users/register", {
+    fetch("https://sustenteco.onrender.com/api/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

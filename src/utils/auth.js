@@ -8,7 +8,7 @@ export async function isAuthenticated() {
       return false;
     }
 
-    const response = await fetch("http://localhost:3000/api/isLogged", {
+    const response = await fetch("https://sustenteco.onrender.com/api/isLogged", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

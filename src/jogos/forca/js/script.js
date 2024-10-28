@@ -216,7 +216,7 @@ async function saveRecord(time, incorrects) {
       return false;
     }
     let res;
-    const response = await fetch("http://localhost:3000/api/record/hangame", {
+    const response = await fetch("https://sustenteco.onrender.com/api/record/hangame", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
