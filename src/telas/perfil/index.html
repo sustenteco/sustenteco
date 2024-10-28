@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Perfil do Jogador</title>
+</head>
+
+<body>
+  <div class="perfil-container">
+    <div class="perfil-card">
+      <!-- Avatar e Nome do jogador -->
+      <div class="perfil-header">
+        <img src="../../../assets/img/avatar-teste.webp" class="perfil-avatar">
+        <div class="perfil-info">
+          <h2>...</h2>
+        </div>
+      </div>
+
+      <!-- Conteúdo dividido em duas colunas -->
+      <div class="perfil-conteudo">
+        <!-- Coluna 1: Jogos -->
+        <div class="coluna">
+          <div class="secao">
+            <h3>Posição no Ranking</h3>
+            <div class="jogos-lista">
+              <div>
+                <span>CrossWorld:</span>
+                <span id="spanCrossworldPosition">...</span>
+              </div>
+              <div>
+                <span>GreenGenius:</span>
+                <span id="spanGreenGeniusPosition">...</span>
+              </div>
+              <div>
+                <span>Hangame:</span>
+                <span id="spanHangamePosition">...</span>
+              </div>
+              <div>
+                <span>Ecopuzzle:</span>
+                <span id="spanEcopuzzlePosition">...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna 2: Informações Adicionais -->
+        <div class="coluna">
+          <div class="secao">
+            <h3>Jogo Mais Jogado</h3>
+            <div class="dados-jogador">
+              <div>
+                <span id="spanJogoMaisJogado">...</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="secao">
+            <h3>Desafios Vencidos</h3>
+            <div class="dados-jogador">
+              <div>
+                <span id="spanDesafiosVencidos">...</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="secao">
+            <h3>Tempo Total</h3>
+            <div class="dados-jogador">
+              <div>
+                <span id="spanTempoTotal">...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botão para ir ao Ranking -->
+      <div class="perfil-actions">
+        <button id="btnGoToRanking" class="btn btn-primary">Ranking</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>

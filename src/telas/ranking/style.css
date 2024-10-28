@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Secular+One&display=swap");
+
+:root {
+    --cor-primaria: #22543d;
+    --cor-secundaria: #f2f2f2;
+    --cor-terciaria: #d6d6d6;
+    --cor-fundo: #fff;
+    --cor-texto: #333;
+    --cor-botao: #4caf50;
+    --fonte-gamer: "Secular One", sans-serif;
+}
+
+body {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto);
+    font-family: var(--fonte-gamer);
+    margin: 0;
+    padding: 16px;
+}
+
+.tab-group {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.tab-header {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--cor-secundaria);
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+}
+
+.tab-header .tab {
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px;
+    background-color: var(--cor-terciaria);
+    border-radius: 4px;
+}
+
+.tab-header .tab.active {
+    background-color: var(--cor-secundaria);
+}
+
+.tab-content .content {
+    display: none;
+}
+
+.tab-content .content.active {
+    display: block;
+}
+
+.ranking-container {
+    background-color: var(--cor-fundo);
+    padding: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--cor-primaria);
+}
+
+h6 {
+    margin: 0;
+    padding: 4px;
+}
+
+.score-user-actual {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.score-user-actual .player {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ranking-table th, .ranking-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid var(--cor-terciaria);
+}
+
+.ranking-table th {
+    background-color: var(--cor-botao);
+    color: var(--cor-secundaria);
+}
+
+.btn-primary {
+    font-family: var(--fonte-gamer);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    background-color: #4caf50;
+    width: 200px;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    border-right: solid #3e8e41 6px;
+    border-bottom: solid #3e8e41 4px;
+  }
+  
+  .btn-primary:hover {
+    color: #3e8e41;
+    transition: 0.1s;
+  }
+
+/* Mobile view */
+.mobile-view {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-color: var(--cor-terciaria);
+        margin: 0;
+        padding: 8px;
+    }
+
+    .desktop-view {
+        display: none;
+    }
+
+    .mobile-view {
+        display: block;
+        width: 100%;
+    }
+
+    .ranking-section {
+        background-color: var(--cor-secundaria);
+        padding: 8px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .ranking-section h2 {
+        font-size: 18px;
+    }
+
+    .ranking-table th, .ranking-table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+}

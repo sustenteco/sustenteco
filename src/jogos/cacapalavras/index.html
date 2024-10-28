@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Caça Palavras</title>
+</head>
+<body>
+  <div class="container">
+    <div id="blur-overlay"></div>
+    <div id="help-dialog">
+      <p>Bem-vindo ao CrossWorld</p>
+      <p>Encontre todas as palavras e ganhe o jogo!</p>
+      <!-- Alterado para "Iniciar Jogo" -->
+      <button id="start-game-button" onclick="startGame()">Jogar Agora</button>
+    </div>
+    <div class="game">
+      <div class="crossword-container" id="game-container">
+        <!-- Botão "Como Jogar?" removido -->
+        <div class="word-list" id="wordList"></div>
+        <div id="crossword" class="crossword"></div>
+        <div id="timer">Tempo: 00:00</div>
+      </div>
+      <div id="game-result-container">
+        <h2>Parabéns! Você caçou todas as palavras!</h2>
+        <p>Tempo Total: <span id="total-time"></span></p>
+        <div class="btn-menu-container">
+          <button id="play-again-button" class="btn btn-primary" onclick="resetGame()">Jogar Novamente</button>
+        </div>
+      </div>
+    </div>
+    <button id="fullscreen-btn"><i id="fullscreen-icon" class="fas fa-expand"></i></button>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+</html>

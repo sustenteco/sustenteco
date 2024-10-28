@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Acerte a palavra</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-12E5W46D78"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-12E5W46D78');
+    </script>
+</head>
+<body>
+    <div id="blur-overlay"></div>
+    <div id="help-dialog">
+        <p>Bem-vindo ao Hangame!</p>
+        <p>
+            Você deve adivinhar palavras relacionadas à sustentabilidade! Use o teclado virtual ou físico para escolher letras e completar a palavra, cada erro remove um ícone de planeta, ao esgotar as tentativas, o jogo termina. A dica ajuda a guiar suas escolhas, e seu objetivo é completar a palavra antes que todos os planetas desapareçam.
+        </p>
+        <button id="start-game" onclick="startGame()">Jogar Agora</button>
+    </div>
+    
+    <div class="container" id="game-content">
+        <div id="game-container">
+            <div class="record-container">
+                <div class="tempo">
+                    <div>Tempo: </div>
+                    <div id="time">00:00</div>
+                </div>
+            </div>  
+            <div class="content">
+                <input type="text" class="typing-input" maxlength="1">
+                <div class="container-inputs">
+                    <div class="inputs"></div>
+                </div>
+                <div class="details">
+                    <p class="hint"><strong>Dica: </strong><span></span></p>
+                    <p class="guess-left">Os planetas são sua vida, não deixe-os VERMELHO!</p>
+                    <div class="planet-lives-container">
+                        <div id="planet-icons"></div>
+                    </div>
+                </div>
+                <div id="keyboard" class="keyboard-container"></div>
+                <div class="button-container">
+                    <button class="reset-btn">Reiniciar o jogo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <div id="result-container" style="display: none;">
+        <h2>Resultados</h2>
+        <p id="result-message"></p>
+        <div class="result">
+            <p>Total de erros: <span id="total-errors"></span></p>
+            <p>Tempo: <span id="total-time"></span></p>
+        </div>
+        <button class="reset-btn">Jogar Novamente</button>
+    </div>
+
+    <button id="fullscreen-btn"><i id="fullscreen-icon" class="fas fa-expand"></i></button>
+    
+    <script src="./js/word.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+</html>

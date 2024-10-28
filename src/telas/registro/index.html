@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="../../../assets/img/favico.ico" type="image/x-icon">
+  <title>Registrar - Sustenteco</title>
+  <!-- Font Awesome para o ícone de olho -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Conteúdo do lado esquerdo (Imagem) -->
+    <div class="left-content">
+      <img src="../../../assets/img/logo.png" alt="Logo Sustenteco">
+    </div>
+
+    <!-- Conteúdo do lado direito (Formulário de registro) -->
+    <div class="right-content">
+      <div id="auth-container">
+        <h2>Crie sua Conta</h2>
+        <form id="register-form">
+          <label for="register-name">Nome:</label>
+          <input type="text" id="register-name" required autocomplete="off">
+          
+          <label for="register-email">Email:</label>
+          <input type="email" id="register-email" required autocomplete="off">
+          
+          <label for="register-password">Senha:</label>
+          <div class="input-password-wrapper">
+            <input type="password" id="register-password" required autocomplete="off">
+            <i class="far fa-eye toggle-password" id="toggle-password"></i>
+          </div>
+          
+          <label for="register-password2">Confirmar Senha:</label>
+          <div class="input-password-wrapper">
+            <input type="password" id="register-password2" required autocomplete="off">
+            <i class="far fa-eye toggle-password" id="toggle-password2"></i>
+          </div>
+          
+          <button class="btn-primary" type="submit">Registrar</button>
+        </form>
+        <p>Já tem uma conta? <a href="../login/index.html">Login</a></p>
+      </div>
+    </div>
+  </div>
+  
+  <div id="snackbar" class="snackbar"></div>
+  <script src="script.js"></script>
+</body>
+</html>

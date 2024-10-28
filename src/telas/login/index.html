@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="../../../assets/img/favico.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Login - Sustenteco</title>
+</head>
+<body>
+  <div class="container">
+    <div class="left-content">
+      <img src="../../../assets/img/logo.png" alt="Logo Sustenteco">
+    </div>
+    <div class="right-content">
+      <div id="auth-container">
+        <h2>Faça seu Login</h2>
+        <form id="login-form">
+          <div class="spinner"></div>
+          <label for="login-email">Email:</label>
+          <input type="email" id="login-email" required autocomplete="off">
+          
+          <label for="login-password">Senha:</label>
+          <div class="input-password-wrapper">
+            <input type="password" id="login-password" required autocomplete="off">
+            <i class="far fa-eye toggle-password" id="toggle-password"></i>
+          </div>
+          <p><a href="#" id="forgot-password">Esqueci minha senha</a></p>
+          <button class="btn-primary" type="submit">Entrar</button>
+          <div class="message"></div>
+        </form>
+        <p>Não tem uma conta? <a href="../registro/index.html">Registrar</a></p>
+      </div>
+    </div>
+  </div>
+  <div id="password-recovery-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="close-modal">&times;</span>
+      <h2>Recuperação de Senha</h2>
+      <div id="email-step">
+        <label for="recovery-email">Digite seu email cadastrado:</label>
+        <input placeholder="Email" type="email" id="recovery-email" required autocomplete="off">
+        <button id="send-code-btn" class="btn-primary">Enviar Código</button>
+      </div>
+      <div id="code-step" style="display: none;">
+        <label for="verification-code">Digite o código de 6 dígitos:</label>
+        <input placeholder="Codigo" type="text" id="verification-code" maxlength="6" required autocomplete="off">
+        <button id="verify-code-btn" class="btn-primary">Verificar Código</button>
+      </div>
+    </div>
+  </div>  
+  <div id="password-reset-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="close-reset-modal">&times;</span>
+      <h2>Redefinir Senha</h2>
+      <div id="reset-step">
+        <label for="new-password">Nova Senha:</label>
+        <input type="password" id="new-password" required autocomplete="off">
+        <label for="confirm-password">Confirmar Nova Senha:</label>
+        <input type="password" id="confirm-password" required autocomplete="off">
+        <button id="reset-password-btn" class="btn-primary">Redefinir Senha</button>
+      </div>
+    </div>
+  </div>  
+  <div id="snackbar" class="snackbar"></div>
+  <script type="module" src="script.js"></script>
+</body>
+</html>

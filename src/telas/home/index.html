@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="../../../assets/img/favico.ico" type="image/x-icon">
+  <title>Início - Sustenteco</title>
+</head>
+
+<body>
+  <nav class="nav-bar">
+    <button id="btnToggleSidebar" class="toggle-sidebar-btn">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <span class="platform-name">
+      <img style="height: 50px;" src="../../../assets/img/sustenteco.png">
+    </span>
+  </nav>
+  
+  <div class="container">
+    <aside class="sidebar">
+      <div class="content-sidebar">
+        <img src="../../../assets/img/avatar-teste.webp" alt="Foto de Perfil" class="profile-pic">
+        <h2 id="msgOla" class="user-greeting"></h4>
+        <span id="spanLogout" class="button-logout">Sair</span>
+        <ul>
+          <li id="liGoToPerfil">Perfil</li>
+          <li id="liGotoRanking">Ranking</li>
+          <li onclick="">Avaliar a Plataforma</li>
+        </ul>
+        <h4>Jogos</h4>
+        <ul>
+          <li class="game-option" data-game="cacapalavras">CrossWorld</li>
+          <li class="game-option" data-game="quiz">GreenGenius</li>
+          <li class="game-option" data-game="hangame">Hangame</li>
+          <li class="game-option" data-game="ecopuzzle">Ecopuzzle</li>
+        </ul>
+      </div>
+    </aside>
+    
+    <main class="content">
+      <div id="game-container">
+        <div class="carousel-container">
+          <div class="carousel desktop-carousel">
+            <div class="carousel-item"><img src="../../../assets/img/ods1.png" alt="Imagem Desktop 1"></div>
+            <div class="carousel-item"><img src="../../../assets/img/ods2.png" alt="Imagem Desktop 2"></div>
+            <div class="carousel-item"><img src="../../../assets/img/ods3.png" alt="Imagem Desktop 3"></div>
+          </div>
+          <div class="carousel mobile-carousel">
+            <div class="carousel-item"><img src="../../../assets/img/ods1cel.png" alt="Imagem Mobile 1"></div>
+            <div class="carousel-item"><img src="../../../assets/img/ods2cel.png" alt="Imagem Mobile 2"></div>
+            <div class="carousel-item"><img src="../../../assets/img/ods3cel.png" alt="Imagem Mobile 3"></div>
+          </div>
+          <div class="carousel-indicators">
+            <span class="indicator" onclick="goToSlide(0)"></span>
+            <span class="indicator" onclick="goToSlide(1)"></span>
+            <span class="indicator" onclick="goToSlide(2)"></span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div id="exitGameModal" class="modal">
+    <div class="modal-content">
+      <h2>Tem certeza que deseja sair do jogo?</h2>
+      <br>
+      <p><strong>Atenção</strong>, caso esteja jogando, você perderá todo o progresso realizado até o momento.</p>
+      <div class="modal-buttons">
+        <button id="btnConfirmExit" class="btn-confirm">Sim, Sair</button>
+        <button id="btnCancelExit" class="btn-cancel">Continuar Jogando</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>
